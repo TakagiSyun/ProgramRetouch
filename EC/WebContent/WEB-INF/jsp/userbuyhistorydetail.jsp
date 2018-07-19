@@ -53,16 +53,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="ubl" items="${userBuyList}">
+
 									<tr>
-										<td class="center">${ubl.name}</td>
-										<td class="center">${udl.price}円</td>
+										<td class="center">名</td>
+										<td class="center">円</td>
 									</tr>
-								</c:forEach>
-								<tr>
-									<td class="center">サンプル</td>
-									<td class="center">123456789円</td>
-								</tr>
+
 							</tbody>
 						</table>
 					</div>

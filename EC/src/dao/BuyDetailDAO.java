@@ -115,6 +115,7 @@ public class BuyDetailDAO {
 				idb.setId(rs.getInt("id"));
 				idb.setName(rs.getString("name"));
 				idb.setPrice(rs.getInt("price"));
+				System.out.println(rs.getInt("price"));
 
 
 				buyDetailItemList.add(idb);
@@ -161,7 +162,7 @@ public class BuyDetailDAO {
 				userBuyList.add(bdb);
 			}
 
-			System.out.println("searching ItemDataBeansList by BuyID has been completed");
+			System.out.println("できたで作ったやつ");
 			return userBuyList;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

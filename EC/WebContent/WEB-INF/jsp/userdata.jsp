@@ -71,6 +71,7 @@
 								<c:forEach var="ub" items="${userBuyList}">
 									<input type="hidden" name="buydate" value="${ub.buyDate}">
 									<input type="hidden" name="deliveryMethodName" value="${ub.deliveryMethodName}">
+									<input type="hidden" name="deliveryMethodPrice" value="${ub.deliveryMethodPrice}">
 									<input type="hidden" name="totalPrice" value="${ub.totalPrice}">
 									<tr>
 										<td class="center"><a
