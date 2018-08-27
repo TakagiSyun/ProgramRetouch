@@ -1,5 +1,6 @@
 <%@	page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,11 +30,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="center">${BDB.buyDate}</td>
-									<td class="center">${BDB.deliveryMethodName}</td>
-									<td class="center">${BDB.totalPrice}円</td>
-								</tr>
+								<c:forEach var="BDB" items="${BDB}">
+									<tr>
+										<td class="center">${BDB.formatDate}</td>
+										<td class="center">${BDB.deliveryMethodName}</td>
+										<td class="center">${BDB.totalPrice}円</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -53,12 +56,18 @@
 								</tr>
 							</thead>
 							<tbody>
-
+								<c:forEach var="Item" items="${ItemList}">
 									<tr>
-										<td class="center">名</td>
-										<td class="center">円</td>
+										<td class="center">${Item.name}</td>
+										<td class="center">${Item.price}円</td>
 									</tr>
-
+								</c:forEach>
+								<c:forEach var="BDB" items="${BDB}">
+									<tr>
+										<td class="center">${BDB.deliveryMethodName}</td>
+										<td class="center">${BDB.deliveryMethodPrice}円</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

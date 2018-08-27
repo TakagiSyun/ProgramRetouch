@@ -69,16 +69,12 @@
 							<tbody>
 
 								<c:forEach var="ub" items="${userBuyList}">
-									<input type="hidden" name="buydate" value="${ub.buyDate}">
-									<input type="hidden" name="deliveryMethodName" value="${ub.deliveryMethodName}">
-									<input type="hidden" name="deliveryMethodPrice" value="${ub.deliveryMethodPrice}">
-									<input type="hidden" name="totalPrice" value="${ub.totalPrice}">
 									<tr>
 										<td class="center"><a
 											href="UserBuyHistoryDetail?buy_id=${ub.id}"
 											class="btn-floating btn waves-effect waves-light "> <i
 												class="material-icons">details</i></a></td>
-										<td class="center">${ub.buyDate}</td>
+										<td class="center">${ub.formatDate}</td>
 										<td class="center">${ub.deliveryMethodName}</td>
 										<td class="center">${ub.totalPrice}円</td>
 									</tr>

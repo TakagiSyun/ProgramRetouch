@@ -144,7 +144,8 @@ public class BuyDetailDAO {
 					+ " FROM t_buy"
 					+ " JOIN m_delivery_method"
 					+ " ON t_buy.delivery_method_id = m_delivery_method.id"
-					+ " WHERE t_buy.user_id = ?");
+					+ " WHERE t_buy.user_id = ?"
+					+ " ORDER BY create_date DESC");
 			st.setInt(1, userId);
 
 			ResultSet rs = st.executeQuery();
@@ -154,7 +155,7 @@ public class BuyDetailDAO {
 				BuyDataBeans bdb = new BuyDataBeans();
 				bdb.setId(rs.getInt("id"));
 				bdb.setTotalPrice(rs.getInt("total_price"));
-				bdb.setBuyDate(rs.getDate("create_date"));
+				bdb.setBuyDate(rs.getTimestamp("create_date"));
 				bdb.setDeliveryMethodName(rs.getString("name"));
 				bdb.setDeliveryMethodPrice(rs.getInt("price"));
 
@@ -163,6 +164,49 @@ public class BuyDetailDAO {
 			}
 
 			System.out.println("できたで作ったやつ");
+			return userBuyList;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	public static ArrayList<BuyDataBeans> getBuyDataBeansListByUserIdBuyId(int userId, int buyId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			System.out.println(userId);
+			System.out.println(buyId);
+			con = DBManager.getConnection();
+			st = con.prepareStatement(
+					"SELECT t_buy.*,m_delivery_method.name,m_delivery_method.price"
+					+ " FROM t_buy"
+					+ " JOIN m_delivery_method"
+					+ " ON t_buy.delivery_method_id = m_delivery_method.id"
+					+ " WHERE t_buy.user_id = ?"
+					+ " AND t_buy.id = ?");
+			st.setInt(1, userId);
+			st.setInt(2, buyId);
+
+			ResultSet rs = st.executeQuery();
+			ArrayList<BuyDataBeans> userBuyList = new ArrayList<BuyDataBeans>();
+
+			while (rs.next()) {
+				BuyDataBeans bdb = new BuyDataBeans();
+				bdb.setId(rs.getInt("id"));
+				bdb.setTotalPrice(rs.getInt("total_price"));
+				bdb.setBuyDate(rs.getTimestamp("create_date"));
+				bdb.setDeliveryMethodName(rs.getString("name"));
+				bdb.setDeliveryMethodPrice(rs.getInt("price"));
+
+
+				userBuyList.add(bdb);
+			}
+			System.out.println("来た");
 			return userBuyList;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

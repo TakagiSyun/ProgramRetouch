@@ -30,13 +30,12 @@ public class UserBuyHistoryDetail extends HttpServlet {
 			String id = request.getParameter("buy_id");
 			int buyId=Integer.parseInt(id);
 
-
 			ArrayList<ItemDataBeans> ItemList = BuyDetailDAO.getItemDataBeansListByBuyId(buyId);
 			 request.setAttribute("ItemList", ItemList);
 
-			int userId = (int) session.getAttribute("userId");
-			ArrayList<BuyDataBeans> userBuyList = BuyDetailDAO.getBuyDataBeansListByUserId(userId);
-			request.setAttribute("userBuyList",userBuyList);
+			 int userId = (int) session.getAttribute("userId");
+			 ArrayList<BuyDataBeans> BDB = BuyDetailDAO.getBuyDataBeansListByUserIdBuyId(userId, buyId);
+			request.setAttribute("BDB", BDB);
 
 			request.getRequestDispatcher(EcHelper.USER_BUY_HISTORY_DETAIL_PAGE).forward(request, response);
 		} catch (Exception e) {
